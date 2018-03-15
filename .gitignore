@@ -1,0 +1,18 @@
+# project-local contains your personal configuration choices and state
+/boston_housing/boston_housing/**
+
+# Files autocreated by Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Notebook stuff
+.ipynb_checkpoints/
+
+# Spyder stuff
+.spyderproject/
+
+# System Files
+.DS_Store
+Thumbs.db
