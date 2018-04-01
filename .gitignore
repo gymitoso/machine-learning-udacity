@@ -1,5 +1,6 @@
 # project-local contains your personal configuration choices and state
 /boston_housing/boston_housing/**
+test.py
 
 # Files autocreated by Python
 __pycache__/
