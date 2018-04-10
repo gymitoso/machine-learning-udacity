@@ -3,6 +3,7 @@
 import sys
 from class_vis import prettyPicture
 from prep_terrain_data import makeTerrainData
+from sklearn.metrics import accuracy_score
 
 from sklearn import tree
 import matplotlib.pyplot as plt
@@ -35,3 +36,17 @@ clf = tree.DecisionTreeClassifier()
 clf = clf.fit(features_train, labels_train)
 
 prettyPicture(clf, features_test, labels_test)
+
+#### compute the accuracy on the testing data
+def DTClassifier(min_split=2):
+    clf = tree.DecisionTreeClassifier(min_samples_split=min_split)
+    clf = clf.fit(features_train, labels_train)
+    pred = clf.predict(features_test)
+    acc = accuracy_score(labels_test,pred)
+    return acc
+
+acc_min_samples_split_2 = DTClassifier()
+acc_min_samples_split_50 = DTClassifier(min_split=50)
+
+print "Accuracy with min samples 2: ", format(round(acc_min_samples_split_2,3))
+print "Accuracy with min samples 50: ", format(round(acc_min_samples_split_50,3))
