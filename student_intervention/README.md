@@ -1,6 +1,10 @@
-# Projeto 2: Aprendizagem supervisionada
+# Aprendizagem supervisionada
 
-## Criando um Sistema de Intervenção para Estudantes
+## Projeto: Criando um Sistema de Intervenção para Estudantes
+
+## Descrição
+Um distrito escolar da região tem como objetivo alcançar 95% de taxa de graduação até o fim da década, identificando alunos que precisam de intervenção antes que eles abandonem a escola. Como um engenheiro de software contratado pelo distrito escolar, sua tarefa é modelar os fatores que predizem a probabilidade de os alunos passarem na avaliação final do Ensino Médio, por meio de um sistema de intervenção baseado em técnicas de aprendizagem supervisionada. O conselho escolar pede que você encontre o modelo mais eficiente que tenha o menor custo computacional para poupar no orçamento. Você precisará analisar o conjunto de dados do desempenho escolar dos estudantes e desenvolver um modelo que preverá a probabilidade de um dado estudante passar, quantificando se uma intervenção é necessária.
+
 ### Instalação
 Este projeto requer **Python 2.7** e as seguintes bibliotecas Python instaladas:
 
@@ -10,7 +14,7 @@ Este projeto requer **Python 2.7** e as seguintes bibliotecas Python instaladas:
 
 Você também precisará ter software instalado para rodar e executar um [iPython Notebook](http://ipython.org/notebook.html)
 
-A Udacity recomenda que os estudantes instalem [Anaconda](https://www.continuum.io/downloads), uma distribuição Python que contém todas as bibliotecas e software necessários para este projeto. 
+A Udacity recomenda que os estudantes instalem [Anaconda](https://www.continuum.io/downloads), uma distribuição Python que contém todas as bibliotecas e software necessários para este projeto.
 
 ### Código
 Um modelo de código é fornecido no arquivo notebook `student_intervention_PT.ipynb`. Mesmo que parte do código já tenha sido fornecida para ajudá-lo a começar, você precisará implementar funcionalidades adicionais em alguns pontos para conseguir completar o projeto com sucesso.
