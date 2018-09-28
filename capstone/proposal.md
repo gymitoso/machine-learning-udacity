@@ -5,17 +5,22 @@ Gabriel Yan Mitoso
 26 de setembro de 2018
 
 ## Proposta
-_(aprox. 2-3 páginas)_
 
 ### Histórico do assunto
-_(aprox. 1-2 parágrafos)_
+Já não é mais novidade que a criminalidade no Brasil possui níveis acima da média mundial, com níveis particulamente altos para crimes a mão armada e homicídios, onde em sua maioria o narcotráfico está envolvido. Apesar da Constituição Brasileira estabelecer cinco instituições policiais diferentes, todas estão com equipamentos sucateados e déficit em seus efetivos.
 
-Nesta seção, dê informações básicas sobre o assunto no qual o projeto está inserido. Informações históricas relevantes ao projeto devem ser incluídas. Deve estar claro como e por qual motivo um problema deste assunto pode ou deve ser resolvido. Pesquisas acadêmicas relacionadas devem ser citadas de forma adequada nesta seção, incluindo o porquê da pesquisa ser relevante. Encorajamos que seja mencionada qual foi a motivação pessoal do aluno para que ele realizasse a investigação de determinado problema nesse domínio, porém, isso não é obrigatório.
+Como se não bastasse a alta taxa de criminalidade e as policias sucateadas, a taxa de ocupação dos presídios brasileiros é de 175%, sendo o Brasil, o terceiro país com mais presos no mundo. A imagem a seguir mostra a distribuição dos crimes no sistema federal.
+
+![Distribuição de Crimes](./images/crime-dist.png)
+
+Como cidadão brasileiro que vive com o medo constante de ser assaltado, acredito que o tema é de suma importância.
+
+- http://www.justica.gov.br/news/ha-726-712-pessoas-presas-no-brasil
+- http://www.cnmp.mp.br/portal/todas-as-noticias/11314-taxa-de-ocupacao-dos-presidios-brasileiros-e-de-175-mostra-relatorio-dinamico-sistema-prisional-em-numeros
+- http://www.ipea.gov.br/atlasviolencia/
 
 ### Descrição do problema
-_(aprox. 1 parágrafo)_
-
-Nesta seção, descreva claramente o problema a ser resolvido. O problema descrito deve ser bem definido e ter pelo menos uma solução possível. Descreva o problema detalhadamente, de forma que fique claro que o problema é quantificável (pode ser expresso em termos matemáticos ou lógicos), mensurável (pode ser medido por uma métrica e claramente observado), e replicável (pode ser reproduzido e ocorre mais de uma vez).
+Com os dados fornecidos pelo Ministério da Justiça, o objetivo do problema é prever a categoria do crime, baseado na cidade, mês, ano e quantidade de ocorrências. Sendo um objetivo também, explorar os dados visualmente, obtendo-se diferentes gráficos.
 
 ### Conjuntos de dados e entradas
 _(aprox. 2-3 parágrafos)_
