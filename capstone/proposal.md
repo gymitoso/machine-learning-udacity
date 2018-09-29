@@ -20,17 +20,44 @@ Como cidadão brasileiro que vive com o medo constante de ser assaltado, acredit
 - http://www.ipea.gov.br/atlasviolencia/
 
 ### Descrição do problema
-Com os dados fornecidos pelo Ministério da Justiça, o objetivo do problema é prever a categoria do crime, baseado na cidade, mês, ano e quantidade de ocorrências. Sendo um objetivo também, explorar os dados visualmente, obtendo-se diferentes gráficos.
+Com os dados fornecidos pelo Secretaria Nacional de Segurança Pública, o objetivo do problema é prever a categoria do crime no estado de São Paulo, baseado na cidade, mês, ano e quantidade de ocorrências. Sendo um objetivo também, explorar os dados visualmente, obtendo-se diferentes gráficos.
 
 ### Conjuntos de dados e entradas
-_(aprox. 2-3 parágrafos)_
+Os dados que serão utilizados neste problema foram fornecidos pela [Secretaria Nacional de Segurança Pública](http://dados.mj.gov.br/dataset/sistema-nacional-de-estatisticas-de-seguranca-publica). O conjunto de dados trata da contabilização do número de ocorrências registradas, para cada cidade, mês e ano considerado.
 
-Nesta seção, o(s) conjunto(s) de dados e/ou entrada(s) considerado(s) para o projeto deve(m) ser descrito(s) detalhadamente, bem como a forma como ele(s) está(ão) relacionado(s) ao problema e por que deverá(ão) ser utilizado(s). Informações tais como a forma de obtenção do conjunto de dados ou entrada e as características do conjunto de dados ou entrada devem ser incluídas com referências relevantes e citações, conforme o necessário. Deve estar claro como o(s) conjunto(s) de dados ou entrada(s) será(ão) utilizado(s) no projeto e se o uso dele(s) é apropriado, dado o contexto do problema.
+Para o escopo deste problema considerei apenas o estado de São Paulo e os anos de 2015 a 2017. A tabela a seguir apresenta a descrição dos dados:
+
+<table>
+<th>Atributo</th>
+<th>Descrição</th>
+<tr>
+<td>Código IBGE do Município</td>
+<td>Código de identificação do município utilizado pelo IBGE.</td>
+</tr>
+<tr>
+<tr>
+<td>Município</td>
+<td>Cidade das ocorrências</td>
+</tr>
+<td>Tipo Crime</td>
+<td>Categoria do crime</td>
+</tr>
+<tr>
+<td>Mês</td>
+<td>Mês das ocorrências, representados de 1 a 12.</td>
+</tr>
+<tr>
+<td>Ano</td>
+<td>Ano das ocorrências</td>
+</tr>
+<tr>
+<td>PC- Qtde de Ocorrências</td>
+<td>Quantidade de ocorrências</td>
+</tr>
+</table>
 
 ### Descrição da solução
-_(aprox. 1 parágrafo)_
-
-Nesta seção, descreva claramente uma solução para o problema. A solução deve ser relevante ao assunto do projeto e adequada ao(s) conjunto(s) ou entrada(s) proposto(s). Descreva a solução detalhadamente, de forma que fique claro que o problema é quantificável (a solução pode ser expressa em termos matemáticos ou lógicos), mensurável (a solução pode ser medida por uma métrica e claramente observada) e replicável (a solução pode ser reproduzida e ocorre mais de uma vez).
+Neste problema de classificação temos que as ocorrências devem ser classificadas em apenas uma categoria de crime, então utilizar o algoritmo de [K-Nearest Neighbors](http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier) deve nos trazer bons resultados. Mas analisando as categorias como variáveis alvo, podemos explorar os algoritmos de [Naive Bayes](http://scikit-learn.org/stable/modules/naive_bayes.html) e [Regressão Logística](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html).
 
 ### Modelo de referência (benchmark)
 _(aproximadamente 1-2 parágrafos)_
