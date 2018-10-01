@@ -15,10 +15,6 @@ Como se não bastasse a alta taxa de criminalidade e as policias sucateadas, a t
 
 Como cidadão brasileiro que vive com o medo constante de ser assaltado, acredito que o tema é de suma importância.
 
-- http://www.justica.gov.br/news/ha-726-712-pessoas-presas-no-brasil
-- http://www.cnmp.mp.br/portal/todas-as-noticias/11314-taxa-de-ocupacao-dos-presidios-brasileiros-e-de-175-mostra-relatorio-dinamico-sistema-prisional-em-numeros
-- http://www.ipea.gov.br/atlasviolencia/
-
 ### Descrição do problema
 Com os dados fornecidos pelo Secretaria Nacional de Segurança Pública, o objetivo do problema é prever a categoria do crime no estado de São Paulo, baseado na cidade, mês, ano e quantidade de ocorrências. Sendo um objetivo também, explorar os dados visualmente, obtendo-se diferentes gráficos.
 
@@ -84,3 +80,10 @@ O quarto passo será para explorar os modelos propostos, [K-Nearest Neighbors](h
 [GridSearchCV](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html).
 
 O último passo seria para analisar o score obtido da métrica de [Log Loss](http://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html), fazer as considerações sobre o resultado obtido e possíveis trabalhos futuros.
+
+### Referências
+- http://www.justica.gov.br/news/ha-726-712-pessoas-presas-no-brasil
+- http://www.cnmp.mp.br/portal/todas-as-noticias/11314-taxa-de-ocupacao-dos-presidios-brasileiros-e-de-175-mostra-relatorio-dinamico-sistema-prisional-em-numeros
+- http://www.ipea.gov.br/atlasviolencia/
+- https://www.kaggle.com/c/sf-crime
+- https://www.kaggle.com/wendykan/don-t-know-what-i-want-to-do-yet
