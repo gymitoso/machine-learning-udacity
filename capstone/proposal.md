@@ -2,7 +2,7 @@
 ## Proposta de projeto final
 Gabriel Yan Mitoso
 
-26 de setembro de 2018
+30 de setembro de 2018
 
 ## Proposta
 
@@ -51,25 +51,36 @@ Para o escopo deste problema considerei apenas o estado de São Paulo e os anos 
 <td>Ano das ocorrências</td>
 </tr>
 <tr>
-<td>PC- Qtde de Ocorrências</td>
+<td>Qtde de Ocorrências</td>
 <td>Quantidade de ocorrências</td>
 </tr>
 </table>
 
 ### Descrição da solução
-Neste problema de classificação temos que as ocorrências devem ser classificadas em apenas uma categoria de crime, então utilizar o algoritmo de [K-Nearest Neighbors](http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier) deve nos trazer bons resultados. Mas analisando as categorias como variáveis alvo, podemos explorar os algoritmos de [Naive Bayes](http://scikit-learn.org/stable/modules/naive_bayes.html) e [Regressão Logística](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html).
+Neste problema de classificação temos que as ocorrências podem ter probabilidades de pertencer a determinada categoria, então utilizar o algoritmo de [K-Nearest Neighbors](http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier) deve nos trazer bons resultados. Mas também podemos explorar o algoritmo de [Regressão Logística](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html).
 
 ### Modelo de referência (benchmark)
-_(aproximadamente 1-2 parágrafos)_
-
-Nesta seção, forneça os detalhes de um modelo ou resultado de referência que esteja relacionado ao assunto, definição do problema e solução proposta. Idealmente, o resultado ou modelo de referência contextualiza os métodos existentes ou informações conhecidas sobre o assunto e problema propostos, que podem então ser objetivamente comparados à solução. Descreva detalhadamente como o resultado ou modelo de referência é mensurável (pode ser medido por alguma métrica e claramente observado).
+A ideia deste problema veio com base no problema [San Francisco Crime Classification](https://www.kaggle.com/c/sf-crime) da Kaggle. Nele temos dados parecidos, como: local, data e categoria, e o objetivo também é prever a categoria do crime. A Kaggle utiliza a métrica de [Log Loss](http://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html) para avaliar os modelos submetidos.
 
 ### Métricas de avaliação
-_(aprox. 1-2 parágrafos)_
+Assim como a Kaggle, pretendo utilizar a métrica de [Log Loss](http://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html), onde será analisado a performance baseado nas probabilidades e o valor real. Considerando apenas uma categoria, a fórmula matemática de log loss é:
+- l(y,p) = -ylog (p) + (y-1)log (1-p)
 
-Nesta seção, proponha ao menos uma métrica de avaliação que pode ser usada para quantificar o desempenho tanto do modelo de benchmark como do modelo de solução apresentados. A(s) métrica(s) de avaliação proposta(s) deve(m) ser adequada(s), considerando o contexto dos dados, da definição do problema e da solução pretendida. Descreva como a(s) métrica(s) de avaliação pode(m) ser obtida(s) e forneça um exemplo de representação matemática para ela(s) (se aplicável). Métricas de avaliação complexas devem ser claramente definidas e quantificáveis (podem ser expressas em termos matemáticos ou lógicos)
+Onde y é o valor real e p é o valor previsto.
 
 ### Design do projeto
-_(aprox. 1 página)_
+O primeiro passo será explorar os dados, apresentando quantidade de colunas e linhas, mostrando as primeiras linhas, descrevendo cada atributo e retirando colunas que não seriam utilizadas.
 
-Nesta seção final, sintetize um fluxo de trabalho teórico para obtenção de uma solução para o problema em questão. Discuta detalhadamente quais estratégias você considera utilizar, quais análises de dados podem ser necessárias de antemão e quais algoritmos serão considerados na sua implementação. O fluxo de trabalho e discussão propostos devem estar alinhados com as seções anteriores. Adicionalmente, você poderá incluir pequenas visualizações, pseudocódigo ou diagramas para auxiliar na descrição do design do projeto, mas não é obrigatório. A discussão deve seguir claramente o fluxo de trabalho proposto para o projeto de conclusão.
+No segundo passo exploraria os dados visualmente, obtendo gráficos como os abaixo:
+
+<img src="./images/events_every_two_weeks.png"/>
+<img src="./images/hourly_events_by_district.png"/>
+
+No primeiro gráfico temos o número de casos a cada 2 semanas, neste caso obterei o número de casos a cada mês. No segundo gráfico temos o número de casos a cada hora por distrito, neste caso poderei obter o número de casos a cada mês por cidade.
+
+O terceiro passo será para pré processar os dados, identificando e analisando possíveis outliers, determinando se devem ser excluídos. Após excluir os outliers, tranformarei os dados não numéricos para facilitar o processamento. Ao final dividirei os dados em dados de teste e de treino.
+
+O quarto passo será para explorar os modelos propostos, [K-Nearest Neighbors](http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier) e [Regressão Logística](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html). Para decidir os melhores parâmetros utilizarei
+[GridSearchCV](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html).
+
+O último passo seria para analisar o score obtido da métrica de [Log Loss](http://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html), fazer as considerações sobre o resultado obtido e possíveis trabalhos futuros.
