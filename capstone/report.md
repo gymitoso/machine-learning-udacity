@@ -5,12 +5,11 @@ Gabriel Yan Mitoso
 20 de Outubro de 2018
 
 ## I. Definição
-_(aprox. 1-2 páginas)_
 
 ### Visão geral do projeto
-Nesta seção, procure fornecer uma visão de alto nível do projeto em linguagem simples. Questões para se perguntar ao escrever esta seção:
-- _Foi fornecido um resumo do projeto final, bem como o domínio do problema, a origem do projeto e o conjunto de dados ou entradas?_
-- _Foram dadas informações suficientes sobre o contexto para que um leitor desinformado possa entender o domínio e a enunciação problema?_
+A criminalidade no Brasil possui níveis acima da média mundial, com níveis particulamente altos para crimes a mão armada e homicídios, onde em sua maioria o narcotráfico está envolvido. Quando algum crime ocorre, um boletim de ocorrência é registrado e nele temos a categoria do crime que foi cometido.
+
+Este trabalho busca através dos registros de ocorrências, fornecidos pela [Secretaria Nacional de Segurança Pública](http://dados.mj.gov.br/dataset/sistema-nacional-de-estatisticas-de-seguranca-publica), prever a categoria do crime no estado de São Paulo.
 
 ### Descrição do problema
 O objetivo do problema é prever a categoria do crime no estado de São Paulo. Para alcançar este objetivo as seguintes tarefas serão aplicadas:
