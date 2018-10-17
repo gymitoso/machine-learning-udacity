@@ -32,20 +32,121 @@ Onde y é o valor real e p é o valor previsto.
 Neste problema de classificação, temos que as ocorrências podem ter probabilidades de pertencer a determinada categoria de crime, então utilizar [Log Loss](http://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html) é uma boa escolha, visto que o score é diminuido a cada categoria mal prevista.
 
 ## II. Análise
-_(aprox. 2-4 páginas)_
 
 ### Exploração dos dados
-Nesta seção, é esperado que você analise os dados que você está usando para o problema. Esses dados podem ser tanto na forma de um conjunto de dados (ou conjuntos de dados), dados de entrada (ou arquivos de entrada), ou até um ambiente. O tipo de dados deve ser descrito detalhadamente e, se possível, ter estatísticas e informações básicas apresentadas (tais como discussão dos atributos de entrada ou definição de características das entradas ou do ambiente) Qualquer anormalidade ou qualidade interessante dos dados que possam precisar ser devidamente tratadas devem ser identificadas (tais como características que precisem ser transformadas ou a possibilidade de valores atípicos) Questões para se perguntar ao escrever esta seção:
-- _Se exite um conjunto de dados para o problema em questão, você discutiu totalmente as características desse conjunto? Uma amostra dos dados foi oferecida ao leitor?_
-- _Se existe um conjunto de dados para o problema, as estatísticas sobre eles foram calculadas e reportadas? Foram discutidos quaisquer resultados relevantes desses cálculos?_
-- _Se **não** existe um conjunto de dados para o problema, foi realizada uma discussão sobre o espaço de entrada ou os dados de entrada do problema?_
-- _Existem anormalidades ou características acerca do espaço de entrada ou conjunto de dados que necessitem ser direcionados? (variáveis categóricas, valores faltando, valores atípicos, etc.)_
+Os dados utilizados neste problema foram fornecidos pela [Secretaria Nacional de Segurança Pública](http://dados.mj.gov.br/dataset/sistema-nacional-de-estatisticas-de-seguranca-publica). O conjunto de dados trata da contabilização do número de ocorrências registradas, para cada cidade, mês e ano considerado.
+
+Para o escopo deste problema foi considerado apenas o estado de São Paulo e os anos de 2015 a 2017. A tabela a seguir apresenta a descrição dos dados:
+
+<table>
+<th>Atributo</th>
+<th>Descrição</th>
+<tr>
+<td>Código IBGE do Município</td>
+<td>Código de identificação do município utilizado pelo IBGE.</td>
+</tr>
+<tr>
+<tr>
+<td>Município</td>
+<td>Cidade das ocorrências</td>
+</tr>
+<td>Tipo Crime</td>
+<td>Categoria do crime</td>
+</tr>
+<tr>
+<td>Mês</td>
+<td>Mês das ocorrências, representados de 1 a 12.</td>
+</tr>
+<tr>
+<td>Ano</td>
+<td>Ano das ocorrências</td>
+</tr>
+<tr>
+<td>Qtde de Ocorrências</td>
+<td>Quantidade de ocorrências</td>
+</tr>
+</table>
+
+A tabela a seguir apresenta as primeiras linha do arquivo csv obtido.
+
+<table>
+<th>Código IBGE Município</th>
+<th>Município</th>
+<th>Tipo Crime</th>
+<th>Mês</th>
+<th>Ano</th>
+<th>Qtde Ocorrências</th>
+<tr>
+<td>3500105</td>
+<td>Adamantina</td>
+<td>Estupro</td>
+<td>2</td>
+<td>2015</td>
+<td>1</td>
+</tr>
+<tr>
+<tr>
+<td>3500105</td>
+<td>Adamantina</td>
+<td>Estupro</td>
+<td>2</td>
+<td>2015</td>
+<td>1</td>
+</tr>
+<tr>
+<tr>
+<td>3500105</td>
+<td>Adamantina</td>
+<td>Estupro</td>
+<td>11</td>
+<td>2015</td>
+<td>1</td>
+</tr>
+<tr>
+<tr>
+<td>3500105</td>
+<td>Adamantina</td>
+<td>Furto de veículo</td>
+<td>2</td>
+<td>2015</td>
+<td>1</td>
+</tr>
+<tr>
+<tr>
+<td>3500105</td>
+<td>Adamantina</td>
+<td>Furto de veículo</td>
+<td>3</td>
+<td>2015</td>
+<td>2</td>
+</tr>
+<tr>
+</table>
+
+Após ler o arquivo csv, obtive algumas informações sobre o mesmo:
+- Número total de registros: 24550
+- Número de atributos: 5
+- Número de categorias de crime: 6
+- Número de cidades: 626
+
+O número de atributos não está correto, pois a biblioteca pandas não indexou todas as colunas.
 
 ### Visualização exploratória
-Nesta seção, você precisará fornecer alguma forma de visualização que sintetize ou evidencie uma característica ou atributo relevante sobre os dados. A visualização deve sustentar adequadamente os dados utilizados. Discuta por que essa visualização foi escolhida e por que é relevante. Questões para se perguntar ao escrever esta seção:
-- _Você visualizou uma característica ou um atributo relevante acerca do conjunto de dados ou dados de entrada?_
-- _A visualização foi completamente analisada e discutida?_
-- _Se um gráfico foi fornecido, os eixos, títulos e dados foram claramente definidos?_
+Por se tratar de um problema real e com dados reais, a visualização e compreensão dos dados é um dos objetivos deste trabalho. O primeiro gráfico a ser obtido é o das cidades com o maior número de ocorrências, e como esperado São Paulo apresenta uma quantidade bem mais significativa do que as outras cidades, chegando a quase 200 mil ocorrências.
+
+<img src="./images/top_cities.png" alt="Cidades com maior número de ocorrências" width="100%" height="100%"/>
+
+No segundo gráfico temos a quantidade de ocorrências para cada mês do ano. Neste gŕafico 4 meses se destacaram pelo maior número de ocorrências: Fevereiro, Abril, Maio e Junho.
+
+<img src="./images/registers_months.png" alt="Número de ocorrências por mês" width="100%" height="100%"/>
+
+O terceiro gráfico trás o número de ocorrências por ano. Os dados de 2017 não estão completos, o que desbalanceou o gráfico, mas percebemos que em 2016 o número de ocorrências diminui consideravelmente.
+
+<img src="./images/registers_years.png" alt="Número de ocorrências por ano" width="100%" height="100%"/>
+
+O último gráfico obtido trás a quantidade de ocorrências para cada categoria de crime. Duas categorias de crime se destacam: Furto de veículo e Roubo de veículo, ambas com um número consideravelmente maior que as outras categorias.
+
+<img src="./images/top_crimes.png" alt="Número de ocorrências por categoria de crime" width="100%" height="100%"/>
 
 ### Algoritmos e técnicas
 Nesta seção, você deverá discutir os algoritmos e técnicas que você pretende utilizar para solucionar o problema. Você deverá justificar o uso de cada algoritmo ou técnica baseado nas características do problema e domínio do problema. Questões para se perguntar ao escrever esta seção:
