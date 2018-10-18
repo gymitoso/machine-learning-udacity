@@ -12,7 +12,7 @@ A criminalidade no Brasil possui níveis acima da média mundial, com níveis pa
 Este trabalho busca através dos registros de ocorrências dos anos de 2015 a 2017, fornecidos pela [Secretaria Nacional de Segurança Pública](http://dados.mj.gov.br/dataset/sistema-nacional-de-estatisticas-de-seguranca-publica), prever a categoria do crime no estado de São Paulo.
 
 ### Descrição do problema
-O objetivo do problema é prever a categoria do crime no estado de São Paulo. Para alcançar este objetivo as seguintes tarefas serão aplicadas:
+O objetivo do problema é prever a categoria do crime no estado de São Paulo, utilizando os registros de ocorrências. E para alcançar este objetivo as seguintes tarefas serão aplicadas:
 1. Explorar os dados, apresentando quantidade de colunas e linhas, mostrando as primeiras linhas e descrevendo cada atributo.
 2. Gerar diferentes histogramas para análise.
 3. Pré processar os dados, identificando e analisando possíveis outliers.
@@ -149,45 +149,67 @@ O último gráfico obtido trás a quantidade de ocorrências para cada categoria
 <img src="./images/top_crimes.png" alt="Número de ocorrências por categoria de crime" width="100%" height="100%"/>
 
 ### Algoritmos e técnicas
-Neste trabalho dois algoritmos serão explorados:
+Neste trabalho dois algoritmos serão explorados e alguns pontos sobre os mesmos são discutidos:
 
 ##### Regressão Logística
 - Modelo bastante utilizado para identificação de grupos, seja na medicina para identificar um grupo de indivíduos doentes, ou em instituições financeiras para identificar grupos de risco para subscrição de crédito.
 - Com este modelo não precisamos nos preocupar com a relação entre os atributos e por ser um modelo facilmente regulável, se torna tolerante a ruídos nos dados, evitando sobreajuste.
 - Se os atributos não forem linearmente separáveis o modelo não terá uma boa perfomance.
-- Por ser regulável, o modelo pode se adaptar ao bom número de atributos do problema, evitando sobreajuste.
+- Por ser regulável e de fácil implementação o modelo se apresenta um bom canditato ao problema.
 
 ##### K-Nearest Neighbors
+- Modelo muito utilizado para problemas de classificação, previsões de estrutura 3D, Interações proteína-proteína, etc.
+- Este modelo possui fácil implementação e consegue lidar com problemas de classificação e regressão.
+- Para dados com muita dimensão o modelo têm baixa perfomance e em qualquer problema é necessário refinar os seus parâmetros.
+- Como os dados utilizados são de baixa dimensão, este modelo também se apresenta um bom canditato ao problema.
 
-
-Nesta seção, você deverá discutir os algoritmos e técnicas que você pretende utilizar para solucionar o problema. Você deverá justificar o uso de cada algoritmo ou técnica baseado nas características do problema e domínio do problema. Questões para se perguntar ao escrever esta seção:
-- _Os algoritmos que serão utilizados, incluindo quaisquer variáveis/parâmetros padrão do projeto, foram claramente definidos?_
-- _As técnicas a serem usadas foram adequadamente discutidas e justificadas?_
-- _Ficou claro como os dados de entrada ou conjuntos de dados serão controlados pelos algoritmos e técnicas escolhidas?_
+Após dividir o conjunto de dados em treino e teste, aplicarei os modelos propostos, [K-Nearest Neighbors](http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier) e [Regressão Logística](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html). Para refinar os parâmetros utilizarei
+[GridSearchCV](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html).
 
 ### Benchmark
 A ideia deste problema veio com base no problema [San Francisco Crime Classification](https://www.kaggle.com/c/sf-crime) da Kaggle. Nele temos dados parecidos, como: local, data e categoria, e o objetivo também é prever a categoria do crime. A Kaggle utiliza a métrica de [Log Loss](http://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html) para avaliar os modelos submetidos. O objetivo é chegar um valor de Log Loss aproximado aos submetidos.
 
 ## III. Metodologia
-_(aprox. 3-5 páginas)_
 
 ### Pré-processamento de dados
-Nesta seção, você deve documentar claramente todos os passos de pré-processamento que você pretende fazer, caso algum seja necessário. A partir da seção anterior, quaisquer anormalidades ou características que você identificou no conjunto de dados deverão ser adequadamente direcionadas e tratadas aqui. Questões para se perguntar ao escrever esta seção:
-- _Se os algoritmos escolhidos requerem passos de pré-processamento, como seleção ou transformações de atributos, tais passos foram adequadamente documentados?_
-- _Baseado na seção de **Exploração de dados**, se existiram anormalidade ou características que precisem ser tratadas, elas foram adequadamente corrigidas?_
-- _Se não é necessário um pré-processamento, foi bem definido o porquê?_
+Os processamentos realizados no conjunto de dados são remover possíveis registros com a categoria de crime vazia, substituir as categorias por números e ao final remover as colunas que não serão utilizadas. Outros processamentos não foram necessários, visto que os dados estão bem ajustados. Ao final do pré processamento dos dados foram divididos 80% para treino e 20% para teste.
 
 ### Implementação
-Nesta seção, o processo de escolha de quais métricas, algoritmos e técnicas deveriam ser implementados para os dados apresentados deve estar claramente documentado. Deve estar bastante claro como a implementação foi feita, e uma discussão deve ser elaborada a respeito de quaisquer complicações ocorridas durante o processo.  Questões para se perguntar ao escrever esta seção:
-- _Ficou claro como os algoritmos e técnicas foram implementados com os conjuntos de dados e os dados de entrada apresentados?_
-- _Houve complicações com as métricas ou técnicas originais que acabaram exigindo mudanças antes de chegar à solução?_
-- _Houve qualquer parte do processo de codificação (escrita de funções complicadas, por exemplo) que deveriam ser documentadas?_
+Os modelos utilizados são de fácil implementação e além da métrica de Log Loss, a pontuação F1 e acurácia também foram obtidas.
+
+##### Regressão Logística
+- <strong>F1</strong>: 0.191974615632
+- <strong>Acurácia</strong>: 0.36150712831
+- <strong>Log Loss</strong>: 1.79175946923
+
+##### K-Nearest Neighbors
+- <strong>F1</strong>: 0.451454935708
+- <strong>Acurácia</strong>: 0.456822810591
+- <strong>Log Loss</strong>: 1.79842892278
+
+Apesar dos algoritmos escolhidos não necessitarem de um pré processamento para os dados, a métrica Log Loss necessita que para cada categoria tenha uma previsão, então foi necessário fazer uma função que recebe a previsão dos algoritmos e retorna no formato para inserir na métrica.
+
+```python
+# função para retornar no formato que a métrica log loss irá utilizar
+def resultFrame(predictions):
+    result_dataframe = pd.DataFrame({
+        "Id": X_test["Código IBGE Município"]
+    })
+    for key,value in data_dict_new.items():
+        result_dataframe[key] = 0
+    count = 0
+    for item in predictions:
+        for key,value in data_dict.items():
+            if(value == item):
+                result_dataframe[key][count] = 1
+        count+=1
+    return result_dataframe
+```
 
 ### Refinamento
-Nesta seção, você deverá discutir o processo de aperfeiçoamento dos algoritmos e técnicas usados em sua implementação. Por exemplo, ajuste de parâmetros para que certos modelos obtenham melhores soluções está dentro da categoria de refinamento. Suas soluções inicial e final devem ser registradas, bem como quaisquer outros resultados intermediários significativos, conforme o necessário. Questões para se perguntar ao escrever esta seção:
-- _Uma solução inicial foi encontrada e claramente reportada?_
-- _O processo de melhoria foi documentado de foma clara, bem como as técnicas utilizadas?_
-- _As soluções intermediárias e finais foram reportadas claramente, conforme o processo foi sendo melhorado?_
+Para a solução inicial os parâmetros 'default' foram utilizados. Para refinar esses parâmetros a técnica GridSearchCV foi utilizada, onde no modelo de Regressão Logística os parâmetros 'tol' e 'C' foram refinados e no modelo K-Nearest-Neighbors os parâmetros 'n_neighbors' e 'weights' foram refinados. A pontuação escolhida como parâmetro do GridSearchCV foi a F1, pois na métrica Log Loss necessita-se fazer a transformação da previsão.
+
+Mesmo após o refinamento as pontuações permaneceram as mesmas.
 
 
 ## IV. Resultados
