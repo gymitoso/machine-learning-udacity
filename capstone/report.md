@@ -213,9 +213,10 @@ Mesmo após o refinamento as pontuações permaneceram as mesmas.
 
 
 ## IV. Resultados
-_(aprox. 2-3 páginas)_
 
 ### Modelo de avaliação e validação
+A maior pontuação final da competição da Kaggle é de  
+
 Nesta seção, o modelo final e quaisquer qualidades que o sustentem devem ser avaliadas em detalhe. Deve ficar claro como o modelo final foi obtido e por que tal modelo foi escolhido. Além disso, algum tipo de análise deve ser realizada para validar a robustez do modelo e sua solução, como, por exemplo, manipular os dados de entrada ou o ambiente para ver como a solução do modelo é afetada (técnica chamada de análise sensitiva). Questões para se perguntar ao escrever esta seção:
 - _O modelo final é razoável e alinhado com as expectativas de solução? Os parâmetros finais do modelo são apropriados?_
 - _O modelo final foi testado com várias entradas para avaliar se o modelo generaliza bem com dados não vistos?_
@@ -239,11 +240,11 @@ Nesta seção, você deverá fornecer alguma forma de visualização que enfatiz
 - _Se um gráfico foi fornecido, os eixos, títulos e dados foram claramente definidos?_
 
 ### Reflexão
-Nesta seção, você deverá resumir os procedimentos desde o problema até a solução e discutir um ou dois aspectos  do projeto que você achou particularmente interessante ou difícil. É esperado que você reflita sobre o projeto como um todo de forma a mostrar que você possui um entendimento sólido de todo o processo empregado em seu trabalho. Questões para se perguntar ao escrever esta seção:
-- _Você resumiu inteiramente o processo que você utilizou neste projeto?_
-- _Houve algum aspecto interessante do projeto?_
-- _Houve algum aspecto difícil do projeto?_
-- _O modelo e solução final alinham-se com suas expectativas para o problema, e devem ser usadas de forma geral para resolver esses tipos de problemas?_
+O trabalho proposto foi baseado no problema [San Francisco Crime Classification](https://www.kaggle.com/c/sf-crime) da Kaggle, onde, após encontrar um conjunto de dados semelhante ao problema e referente as ocorrências brasileiras, obtive interesse pelo problema. Então, após obter os dados da Secretaria Nacional de Segurança Pública, explorei o conjunto de dados para obter algumas informações sobre o mesmo e depois gerei alguns gráficos com o intuito de analisar o conjunto de dados de diferentes formas. Após pré processar os dados, utilizei os algoritmos de Regressão Logística e K-Nearest-Neighbors para a solução e a métrica Log Loss foi utilizada para validá-los. Ao final, para refinar os modelos, a técnica GridSearchCV foi utilizada.
+
+Apesar do problem não ter nenhuma aspecto difícil, analisar o conjunto de dados visualmente se mostrou muito interessante pela natureza do projeto. Verificou-se neste projeto que a maioria das ocorrências são de roubo ou furto de veículos e que São Paulo possui um número muito elevado de ocorrências e que seus dados deveriam ser analisados separadamente.
+
+Mesmo não obtendo resultados consistentes devido ao conjunto de dados, adotaria os mesmos procedimentos para solucionar problemas semelhantes.
 
 ### Melhorias
 Nesta seção, você deverá discutir como um aspecto da sua implementação poderia ser melhorado. Por exemplo, considere maneiras de tornar a sua implementação mais geral e o que precisaria ser modificado. Você não precisa fazer a melhoria, mas as possíveis soluções que resultariam de tais mudanças devem ser consideradas e comparadas/contrastadas com a sua solução atual. Questões para se perguntar ao escrever esta seção:
