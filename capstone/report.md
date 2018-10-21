@@ -2,7 +2,7 @@
 ## Projeto final
 Gabriel Yan Mitoso
 
-20 de Outubro de 2018
+21 de Outubro de 2018
 
 ## I. Definição
 
@@ -68,7 +68,8 @@ Para o escopo deste problema foi considerado apenas o estado de São Paulo e os 
 </table>
 
 A tabela a seguir apresenta as primeiras linha do arquivo csv obtido.
-
+<br>
+<br>
 <table>
 <th>Código IBGE Município</th>
 <th>Município</th>
@@ -215,39 +216,63 @@ Mesmo após o refinamento as pontuações permaneceram as mesmas.
 ## IV. Resultados
 
 ### Modelo de avaliação e validação
-A maior pontuação final da competição da Kaggle é de  
-
-Nesta seção, o modelo final e quaisquer qualidades que o sustentem devem ser avaliadas em detalhe. Deve ficar claro como o modelo final foi obtido e por que tal modelo foi escolhido. Além disso, algum tipo de análise deve ser realizada para validar a robustez do modelo e sua solução, como, por exemplo, manipular os dados de entrada ou o ambiente para ver como a solução do modelo é afetada (técnica chamada de análise sensitiva). Questões para se perguntar ao escrever esta seção:
-- _O modelo final é razoável e alinhado com as expectativas de solução? Os parâmetros finais do modelo são apropriados?_
-- _O modelo final foi testado com várias entradas para avaliar se o modelo generaliza bem com dados não vistos?_
--_O modelo é robusto o suficiente para o problema? Pequenas perturbações (mudanças) nos dados de treinamento ou no espaço de entrada afetam os resultados de forma considerável?_
-- _Os resultados obtidos do modelo são confiáveis?_
+A técnica GridSearchCV retornou os melhores parâmetros, sendo os 'defaults' (que já são utilizados pelos algoritmos) os melhores. Para variar um pouco as entradas modifiquei o parâmetro 'random_state' dá função train_test_split, e os resultados obtidos foram semelhantes aos apresentados.
 
 ### Justificativa
-Nesta seção, a solução final do seu modelo e os resultados dela obtidos devem ser comparados aos valores de referência (benchmark) que você estabeleceu anteriormente no projeto, usando algum tipo de análise estatística. Você deverá também justificar se esses resultados e a solução são significativas o suficiente para ter resolvido o problema apresentado no projeto. Questões para se perguntar ao escrever esta seção:
-- _Os resultados finais encontrados são mais fortes do que a referência reportada anteriormente?_
-- _Você analisou e discutiu totalmente a solução final?_
-- _A solução final é significativa o suficiente para ter resolvido o problema?_
+Analisando a pontuação F1 e acurácia o algoritmo não se saiu tão bem e utilizá-lo na vida real não seria viável, mas se compararmos aos primeiros colocados do problema [San Francisco Crime Classification](https://www.kaggle.com/c/sf-crime), os algoritmos se saíram bem, onde o primeiro colocado da Kaggle tem a pontuação de 1.95936. Obviamente não se pode dizer que os algoritmos apresentados se saíram melhor, mas sim que um resultado satisfatório foi encontrado.
 
 
 ## V. Conclusão
-_(aprox. 1-2 páginas)_
 
 ### Foma livre de visualização
-Nesta seção, você deverá fornecer alguma forma de visualização que enfatize uma qualidade importante do projeto. A visualização é de forma livre, mas deve sustentar de forma razoável um resultado ou característica relevante sobre o problema que você quer discutir. Questões para se perguntar ao escrever esta seção:
-- _Você visualizou uma qualidade importante ou relevante acerca do problema, conjunto de dados, dados de entrada, ou resultados?_
-- _A visualização foi completamente analisada e discutida?_
-- _Se um gráfico foi fornecido, os eixos, títulos e dados foram claramente definidos?_
+
+A tabela a seguir apresenta a correlação entre os atributos utilizados para teste, obtida utilizando a função [corr](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.corr.html).
+
+<table>
+<th></th>
+<th>Código IBGE Município</th>
+<th>Mês</th>
+<th>Ano</th>
+<th>Qtde Ocorrências</th>
+<tr>
+<th>Código IBGE Município</th>
+<td>1.000000</td>
+<td>-0.003562</td>
+<td>0.002353</td>
+<td>0.072456</td>
+</tr>
+<tr>
+<th>Mês</th>
+<td>-0.003562</td>
+<td>1.000000</td>
+<td>-0.235237</td>
+<td>0.000829</td>
+</tr>
+<tr>
+<th>Ano</th>
+<td>0.002353</td>
+<td>-0.235237</td>
+<td>1.000000</td>
+<td>-0.002990</td>
+</tr>
+<th>Qtde Ocorrências</th>
+<td>0.072456</td>
+<td>0.000829</td>
+<td>-0.002990</td>
+<td>1.000000</td>
+</tr>
+</table>
+
+Analisando a tabela descobrimos uma característica importante do conjunto de dados: os atributos não possuem correlação entre si. Esta característica nos ajuda na escolha de algoritmos que podem ser utilizados no futuro.
 
 ### Reflexão
 O trabalho proposto foi baseado no problema [San Francisco Crime Classification](https://www.kaggle.com/c/sf-crime) da Kaggle, onde, após encontrar um conjunto de dados semelhante ao problema e referente as ocorrências brasileiras, obtive interesse pelo problema. Então, após obter os dados da Secretaria Nacional de Segurança Pública, explorei o conjunto de dados para obter algumas informações sobre o mesmo e depois gerei alguns gráficos com o intuito de analisar o conjunto de dados de diferentes formas. Após pré processar os dados, utilizei os algoritmos de Regressão Logística e K-Nearest-Neighbors para a solução e a métrica Log Loss foi utilizada para validá-los. Ao final, para refinar os modelos, a técnica GridSearchCV foi utilizada.
 
-Apesar do problem não ter nenhuma aspecto difícil, analisar o conjunto de dados visualmente se mostrou muito interessante pela natureza do projeto. Verificou-se neste projeto que a maioria das ocorrências são de roubo ou furto de veículos e que São Paulo possui um número muito elevado de ocorrências e que seus dados deveriam ser analisados separadamente.
+Apesar do problem não ter nenhum aspecto difícil, analisar o conjunto de dados visualmente se mostrou muito interessante pela natureza do projeto. Verificou-se neste projeto que a maioria das ocorrências são de roubo ou furto de veículos e que a cidade de São Paulo possui um número muito elevado de ocorrências e que seus dados deveriam ser analisados separadamente.
 
 Mesmo não obtendo resultados consistentes devido ao conjunto de dados, adotaria os mesmos procedimentos para solucionar problemas semelhantes.
 
 ### Melhorias
-Nesta seção, você deverá discutir como um aspecto da sua implementação poderia ser melhorado. Por exemplo, considere maneiras de tornar a sua implementação mais geral e o que precisaria ser modificado. Você não precisa fazer a melhoria, mas as possíveis soluções que resultariam de tais mudanças devem ser consideradas e comparadas/contrastadas com a sua solução atual. Questões para se perguntar ao escrever esta seção:
-- _Existem melhorias futuras que podem ser feitas nos algoritmos ou técnicas que você usou neste projeto?_
-- _Existem algoritmos ou técnicas que você pesquisou, porém não soube como implementá-las, mas consideraria usar se você soubesse como?_
-- _Se você usou sua solução final como nova referência, você acredita existir uma solução ainda melhor?_
+Apesar de melhorias poderem ser alcançadas nos algoritmos utilizados, acredito que outros algoritmos devam ser explorados, como [XgBoost](https://xgboost.readthedocs.io/en/latest/python/python_intro.html), o qual foi utilizado pelos competidores da Kaggle para solucionar o problema [San Francisco Crime Classification](https://www.kaggle.com/c/sf-crime).
+
+Outra possibilidade seria a [Secretaria Nacional de Segurança Pública](http://dados.mj.gov.br/dataset/sistema-nacional-de-estatisticas-de-seguranca-publica) enriquecer o conjunto de dados com outras informações das ocorrências. Dessa forma as previsões poderiam melhorar e teriam mais formas de explorar o conjunto de dados.
