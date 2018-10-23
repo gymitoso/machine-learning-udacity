@@ -216,7 +216,20 @@ Mesmo após o refinamento as pontuações permaneceram as mesmas.
 ## IV. Resultados
 
 ### Modelo de avaliação e validação
-A técnica GridSearchCV retornou os melhores parâmetros, sendo os 'defaults' (que já são utilizados pelos algoritmos) os melhores. Para variar um pouco as entradas modifiquei o parâmetro 'random_state' dá função train_test_split, e os resultados obtidos foram semelhantes aos apresentados.
+A técnica GridSearchCV retornou os melhores parâmetros, sendo, em sua maioria, os 'defaults' (que já são utilizados pelos algoritmos) os melhores. Para variar um pouco as entradas modifiquei o parâmetro 'random_state' dá função train_test_split, e os resultados obtidos foram semelhantes aos apresentados. Abaixo temos ambos os algoritmos otimizados:
+
+```python
+KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+         metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+         weights='uniform')
+
+LogisticRegression(C=1, class_weight=None, dual=False, fit_intercept=True,
+         intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
+         penalty='l2', random_state=None, solver='liblinear', tol=0.001,
+         verbose=0, warm_start=False)
+```
+
+O parâmetro 'tol' do algoritmo de Regressão Logística foi o único que houve mudança do padrão 0.0001 para 0.001. O parâmetro indica a tolerância do algoritmo para critério de parada. O fato do parâmetro 'tol' ter diminuido nos indica que a técnica GridSearchCV retornou os valores 'defaults' pois nosso conjunto de dados têm poucos atributos, não necessitando de grandes refinamentos.
 
 ### Justificativa
 Analisando a pontuação F1 e acurácia o algoritmo não se saiu tão bem e utilizá-lo na vida real não seria viável, mas se compararmos aos primeiros colocados do problema [San Francisco Crime Classification](https://www.kaggle.com/c/sf-crime), os algoritmos se saíram bem, onde o primeiro colocado da Kaggle tem a pontuação de 1.95936. Obviamente não se pode dizer que os algoritmos apresentados se saíram melhor, mas sim que um resultado satisfatório foi encontrado.
@@ -224,46 +237,21 @@ Analisando a pontuação F1 e acurácia o algoritmo não se saiu tão bem e util
 
 ## V. Conclusão
 
-### Foma livre de visualização
+### Forma livre de visualização
 
-A tabela a seguir apresenta a correlação entre os atributos utilizados para teste, obtida utilizando a função [corr](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.corr.html).
+O gráfico a seguir apresenta a quantidade de ocorrências para cada categoria de crime (as quais foram substituídas por números) dos dados de teste.
 
-<table>
-<th></th>
-<th>Código IBGE Município</th>
-<th>Mês</th>
-<th>Ano</th>
-<th>Qtde Ocorrências</th>
-<tr>
-<th>Código IBGE Município</th>
-<td>1.000000</td>
-<td>-0.003562</td>
-<td>0.002353</td>
-<td>0.072456</td>
-</tr>
-<tr>
-<th>Mês</th>
-<td>-0.003562</td>
-<td>1.000000</td>
-<td>-0.235237</td>
-<td>0.000829</td>
-</tr>
-<tr>
-<th>Ano</th>
-<td>0.002353</td>
-<td>-0.235237</td>
-<td>1.000000</td>
-<td>-0.002990</td>
-</tr>
-<th>Qtde Ocorrências</th>
-<td>0.072456</td>
-<td>0.000829</td>
-<td>-0.002990</td>
-<td>1.000000</td>
-</tr>
-</table>
+<img src="./images/top_crimes_test.png" alt="Número de ocorrências por categoria de crime" width="100%" height="100%"/>
 
-Analisando a tabela descobrimos uma característica importante do conjunto de dados: os atributos não possuem correlação entre si. Esta característica nos ajuda na escolha de algoritmos que podem ser utilizados no futuro.
+O gráfico a seguir apresenta a quantidade de ocorrências para cada categoria de crime dos dados previstos do algoritmo de Regressão Logística.
+
+<img src="./images/top_crimes_predictions_log.png" alt="Número de ocorrências por categoria de crime" width="100%" height="100%"/>
+
+O gráfico a seguir apresenta a quantidade de ocorrências para cada categoria de crime dos dados previstos do algoritmo de K-Nearest-Neighbors.
+
+<img src="./images/top_crimes_predictions_knn.png" alt="Número de ocorrências por categoria de crime" width="100%" height="100%"/>
+
+Os gráficos anteriores apresentam uma característica importante do algoritmo de K-Nearest-Neighbors, manter a distribuição dos dados, pois ele mantém os dados de treino. Então mesmo que o algoritmo de Regressão Logística tenha se saído um pouco melhor na métrica de Log Loss escolho o algoritmo de K-Nearest-Neighbors, visto que para neste problema a distribuição dos dados é de suma importância.
 
 ### Reflexão
 O trabalho proposto foi baseado no problema [San Francisco Crime Classification](https://www.kaggle.com/c/sf-crime) da Kaggle, onde, após encontrar um conjunto de dados semelhante ao problema e referente as ocorrências brasileiras, obtive interesse pelo problema. Então, após obter os dados da Secretaria Nacional de Segurança Pública, explorei o conjunto de dados para obter algumas informações sobre o mesmo e depois gerei alguns gráficos com o intuito de analisar o conjunto de dados de diferentes formas. Após pré processar os dados, utilizei os algoritmos de Regressão Logística e K-Nearest-Neighbors para a solução e a métrica Log Loss foi utilizada para validá-los. Ao final, para refinar os modelos, a técnica GridSearchCV foi utilizada.
@@ -276,3 +264,13 @@ Mesmo não obtendo resultados consistentes devido ao conjunto de dados, adotaria
 Apesar de melhorias poderem ser alcançadas nos algoritmos utilizados, acredito que outros algoritmos devam ser explorados, como [XgBoost](https://xgboost.readthedocs.io/en/latest/python/python_intro.html), o qual foi utilizado pelos competidores da Kaggle para solucionar o problema [San Francisco Crime Classification](https://www.kaggle.com/c/sf-crime).
 
 Outra possibilidade seria a [Secretaria Nacional de Segurança Pública](http://dados.mj.gov.br/dataset/sistema-nacional-de-estatisticas-de-seguranca-publica) enriquecer o conjunto de dados com outras informações das ocorrências. Dessa forma as previsões poderiam melhorar e teriam mais formas de explorar o conjunto de dados.
+
+
+## VI. Referências
+- https://www.kaggle.com/c/sf-crime
+- http://dados.mj.gov.br/dataset/sistema-nacional-de-estatisticas-de-seguranca-publica
+- https://xgboost.readthedocs.io/en/latest/python/python_intro.html
+- http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier
+- http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
+- http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html
+- http://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html
